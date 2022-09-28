@@ -5,10 +5,7 @@ follows = Blueprint('follows', __name__,
                     template_folder='templates',
                     static_folder='../static')
 
-from flask_debugtoolbar import DebugToolbarExtension
-from sqlalchemy.exc import IntegrityError
-
-from models import db, Follows
+from models import db
 from ..users.models import User
 
 # follows routes:

@@ -1,7 +1,6 @@
-from flask_bcrypt import Bcrypt
+
 from flask_sqlalchemy import SQLAlchemy
 
-bcrypt = Bcrypt()
 db = SQLAlchemy()
 
 DEFAULT_IMAGE_URL = "/static/images/default-pic.png"

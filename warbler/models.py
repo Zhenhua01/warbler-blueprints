@@ -1,15 +1,15 @@
-"""SQLAlchemy models for Warbler."""
+# """SQLAlchemy models for Warbler."""
 
-from datetime import datetime
+# from datetime import datetime
 
-from flask_bcrypt import Bcrypt
-from flask_sqlalchemy import SQLAlchemy
+# from flask_bcrypt import Bcrypt
+# from flask_sqlalchemy import SQLAlchemy
 
-bcrypt = Bcrypt()
-db = SQLAlchemy()
+# bcrypt = Bcrypt()
+# db = SQLAlchemy()
 
-DEFAULT_IMAGE_URL = "/static/images/default-pic.png"
-DEFAULT_HEADER_IMAGE_URL = "/static/images/warbler-hero.jpg"
+# DEFAULT_IMAGE_URL = "/static/images/default-pic.png"
+# DEFAULT_HEADER_IMAGE_URL = "/static/images/warbler-hero.jpg"
 
 
 # class Follows(db.Model):
@@ -173,14 +173,14 @@ DEFAULT_HEADER_IMAGE_URL = "/static/images/warbler-hero.jpg"
 #     )
 
 
-def connect_db(app):
-    """Connect this database to provided Flask app.
+# def connect_db(app):
+#     """Connect this database to provided Flask app.
 
-    You should call this in your Flask app.
-    """
+#     You should call this in your Flask app.
+#     """
 
-    db.app = app
-    db.init_app(app)
+#     db.app = app
+#     db.init_app(app)
 
 
 # class Like(db.Model):

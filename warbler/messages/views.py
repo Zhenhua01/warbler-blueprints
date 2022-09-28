@@ -5,9 +5,6 @@ messages = Blueprint('messages', __name__,
                     template_folder='templates',
                     static_folder='../static')
 
-from flask_debugtoolbar import DebugToolbarExtension
-from sqlalchemy.exc import IntegrityError
-
 from forms import MessageForm
 
 from models import db, Message

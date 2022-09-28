@@ -6,9 +6,11 @@ users = Blueprint('users', __name__,
                     static_folder='../static')
 
 
-from forms import UserAddForm, UserEditForm
+from forms import UserEditForm
 from models import db, User
-# from ..users.models import User
+
+from warbler.root.views import do_logout
+
 DEFAULT_IMAGE_URL = "/static/images/default-pic.png"
 DEFAULT_HEADER_IMAGE_URL = "/static/images/warbler-hero.jpg"
 
