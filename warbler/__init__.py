@@ -1,3 +1,12 @@
+from flask import Flask
+from warbler.messages import messages
+
+app = Flask(__name__)
+app.register_blueprint(messages)
+
+
+
+# edit above^
 import os
 from dotenv import load_dotenv
 
@@ -17,7 +26,7 @@ load_dotenv()
 
 CURR_USER_KEY = "curr_user"
 
-app = Flask(__name__)
+# app = Flask(__name__)
 
 # Get DB_URI from environ variable (useful for production/testing) or,
 # if not set there, use development local db.
@@ -337,64 +346,64 @@ def delete_user():
 ##############################################################################
 # Messages routes:
 
-@app.route('/messages/new', methods=["GET", "POST"])
-def add_message():
-    """Add a message:
+# @app.route('/messages/new', methods=["GET", "POST"])
+# def add_message():
+#     """Add a message:
 
-    Show form if GET. If valid, update message and redirect to user page.
-    """
+#     Show form if GET. If valid, update message and redirect to user page.
+#     """
 
-    if not g.user:
-        flash("Access unauthorized.", "danger")
-        return redirect("/")
+#     if not g.user:
+#         flash("Access unauthorized.", "danger")
+#         return redirect("/")
 
-    form = MessageForm()
+#     form = MessageForm()
 
-    if form.validate_on_submit():
-        msg = Message(text=form.text.data)
-        g.user.messages.append(msg)
-        db.session.commit()
+#     if form.validate_on_submit():
+#         msg = Message(text=form.text.data)
+#         g.user.messages.append(msg)
+#         db.session.commit()
 
-        return redirect(f"/users/{g.user.id}")
+#         return redirect(f"/users/{g.user.id}")
 
-    return render_template('messages/create.html', form=form)
-
-
-@app.get('/messages/<int:message_id>')
-def show_message(message_id):
-    """Show a message."""
-
-    if not g.user:
-        flash("Access unauthorized.", "danger")
-        return redirect("/")
-
-    msg = Message.query.get_or_404(message_id)
-    return render_template('messages/show.html', message=msg)
+#     return render_template('messages/create.html', form=form)
 
 
-@app.post('/messages/<int:message_id>/delete')
-def delete_message(message_id):
-    """Delete a message.
+# @app.get('/messages/<int:message_id>')
+# def show_message(message_id):
+#     """Show a message."""
 
-    Check that this message was written by the current user.
-    Redirect to user page on success.
-    """
+#     if not g.user:
+#         flash("Access unauthorized.", "danger")
+#         return redirect("/")
 
-    form = g.csrf_form
+#     msg = Message.query.get_or_404(message_id)
+#     return render_template('messages/show.html', message=msg)
 
-    if not form.validate_on_submit() or not g.user:
-        flash("Access unauthorized.", "danger")
-        return redirect("/")
 
-    msg = Message.query.get_or_404(message_id)
-    if msg.user_id != g.user.id:
-        flash("Access unauthorized.", "danger")
-        return redirect("/")
+# @app.post('/messages/<int:message_id>/delete')
+# def delete_message(message_id):
+#     """Delete a message.
 
-    db.session.delete(msg)
-    db.session.commit()
+#     Check that this message was written by the current user.
+#     Redirect to user page on success.
+#     """
 
-    return redirect(f"/users/{g.user.id}")
+#     form = g.csrf_form
+
+#     if not form.validate_on_submit() or not g.user:
+#         flash("Access unauthorized.", "danger")
+#         return redirect("/")
+
+#     msg = Message.query.get_or_404(message_id)
+#     if msg.user_id != g.user.id:
+#         flash("Access unauthorized.", "danger")
+#         return redirect("/")
+
+#     db.session.delete(msg)
+#     db.session.commit()
+
+#     return redirect(f"/users/{g.user.id}")
 
 
 ##############################################################################
