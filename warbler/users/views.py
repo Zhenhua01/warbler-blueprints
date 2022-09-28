@@ -15,7 +15,7 @@ DEFAULT_IMAGE_URL = "/static/images/default-pic.png"
 DEFAULT_HEADER_IMAGE_URL = "/static/images/warbler-hero.jpg"
 
 
-@users.get('/users')
+@users.route('/users', methods=["GET"])
 def list_users():
     """Page with listing of users.
 
@@ -33,10 +33,10 @@ def list_users():
     else:
         users = User.query.filter(User.username.like(f"%{search}%")).all()
 
-    return render_template('/index.html', users=users)
+    return render_template('index.html', users=users)
 
 
-@users.get('/users/<int:user_id>')
+@users.route('/users/<int:user_id>', methods=["GET"])
 def show_user(user_id):
     """Show user profile."""
 
@@ -46,7 +46,7 @@ def show_user(user_id):
 
     user = User.query.get_or_404(user_id)
 
-    return render_template('users/show.html', user=user)
+    return render_template('show.html', user=user)
 
 
 @users.route('/users/profile', methods=["GET", "POST"])
@@ -77,7 +77,7 @@ def edit_profile():
 
         flash("Wrong password, please try again.", 'danger')
 
-    return render_template('users/edit.html', form=form, user_id=user.id)
+    return render_template('/edit.html', form=form, user_id=user.id)
 
 
 @users.post('/users/delete')

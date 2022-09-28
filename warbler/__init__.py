@@ -5,14 +5,14 @@ from warbler.users.views import users
 from warbler.follows.views import follows
 from warbler.likes.views import likes
 
-users.register_blueprint(follows, url_prefix='/follows')
-users.register_blueprint(likes, url_prefix='/likes')
+# users.register_blueprint(follows, url_prefix='/follows')
+# users.register_blueprint(likes, url_prefix='/likes')
 
 app = Flask(__name__)
 
 app.register_blueprint(root, url_prefix='/')
-# app.register_blueprint(messages, url_prefix='/messages')
-# app.register_blueprint(users, url_prefix='/users')
+app.register_blueprint(messages, url_prefix='/messages')
+app.register_blueprint(users, url_prefix='/users')
 
 
 # edit above^

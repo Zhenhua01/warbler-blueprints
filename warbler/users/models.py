@@ -3,6 +3,9 @@ from warbler.follows.models import Follows
 from flask_bcrypt import Bcrypt
 from flask_sqlalchemy import SQLAlchemy
 
+from warbler.messages.models import Message
+from warbler.likes.models import Like
+
 bcrypt = Bcrypt()
 db = SQLAlchemy()
 
@@ -54,17 +57,17 @@ class User(db.Model):
         nullable=False,
     )
 
-    messages = db.relationship('Message', backref="user")
+    # messages = db.relationship('Message', backref="user")
 
-    followers = db.relationship(
-        "User",
-        secondary="follows",
-        primaryjoin=(Follows.user_being_followed_id == id),
-        secondaryjoin=(Follows.user_following_id == id),
-        backref="following",
-    )
+    # followers = db.relationship(
+    #     "User",
+    #     secondary="follows",
+    #     primaryjoin=(Follows.user_being_followed_id == id),
+    #     secondaryjoin=(Follows.user_following_id == id),
+    #     backref="following",
+    # )
 
-    liked_messages = db.relationship('Message', secondary="likes")
+    # liked_messages = db.relationship('Message', secondary="likes")
 
     def __repr__(self):
         return f"<User #{self.id}: {self.username}, {self.email}>"

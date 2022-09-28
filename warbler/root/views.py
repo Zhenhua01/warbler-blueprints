@@ -18,22 +18,22 @@ CURR_USER_KEY = "curr_user"
 
 # User signup/login/logout
 
-# @root.before_request
-# def add_user_to_g():
-#     """If we're logged in, add curr user to Flask global."""
+@root.before_request
+def add_user_to_g():
+    """If we're logged in, add curr user to Flask global."""
 
-#     if CURR_USER_KEY in session:
-#         g.user = User.query.get(session[CURR_USER_KEY])
+    if CURR_USER_KEY in session:
+        g.user = User.query.get(session[CURR_USER_KEY])
 
-#     else:
-#         g.user = None
+    else:
+        g.user = None
 
 
-# @root.before_request
-# def add_csrf_only_form():
-#     """Add a CSRF-only form so that every route can use it."""
+@root.before_request
+def add_csrf_only_form():
+    """Add a CSRF-only form so that every route can use it."""
 
-#     g.csrf_form = CSRFProtection()
+    g.csrf_form = CSRFProtection()
 
 
 def do_login(user):
@@ -135,16 +135,16 @@ def homepage():
     """
 
     if g.user:
-        following_ids = [f.id for f in g.user.following] + [g.user.id]
+        # following_ids = [f.id for f in g.user.following] + [g.user.id]
 
-        messages = (Message
-                    .query
-                    .filter(Message.user_id.in_(following_ids))
-                    .order_by(Message.timestamp.desc())
-                    .limit(100)
-                    .all())
+        # messages = (Message
+        #             .query
+        #             .filter(Message.user_id.in_(following_ids))
+        #             .order_by(Message.timestamp.desc())
+        #             .limit(100)
+        #             .all())
 
-        return render_template('home.html', messages=messages)
+        return render_template('/home.html', messages="")
 
     else:
         return render_template('/home-anon.html')

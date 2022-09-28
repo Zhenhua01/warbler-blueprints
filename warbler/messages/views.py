@@ -34,7 +34,7 @@ def add_message():
     return render_template('messages/create.html', form=form)
 
 
-@messages.route('/messages/<int:message_id>', method=["GET"])
+@messages.route('/messages/<int:message_id>', methods=["GET"])
 def show_message(message_id):
     """Show a message."""
 
@@ -46,7 +46,7 @@ def show_message(message_id):
     return render_template('messages/show.html', message=msg)
 
 
-@messages.route('/messages/<int:message_id>/delete', method=["POST"])
+@messages.route('/messages/<int:message_id>/delete', methods=["POST"])
 def delete_message(message_id):
     """Delete a message.
 
