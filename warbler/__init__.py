@@ -11,8 +11,8 @@ users.register_blueprint(likes, url_prefix='/likes')
 app = Flask(__name__)
 
 app.register_blueprint(root, url_prefix='/')
-app.register_blueprint(messages, url_prefix='/messages')
-app.register_blueprint(users, url_prefix='/users')
+# app.register_blueprint(messages, url_prefix='/messages')
+# app.register_blueprint(users, url_prefix='/users')
 
 
 # edit above^
@@ -23,7 +23,7 @@ from dotenv import load_dotenv
 from flask import Flask
 from flask_debugtoolbar import DebugToolbarExtension
 
-from config import connect_db
+from warbler.config import connect_db
 
 load_dotenv()
 

@@ -5,9 +5,9 @@ messages = Blueprint('messages', __name__,
                     template_folder='templates',
                     static_folder='../static')
 
-from forms import MessageForm
+from warbler.messages.forms import MessageForm
 
-from models import db, Message
+from warbler.messages.models import db, Message
 
 # Messages routes:
 

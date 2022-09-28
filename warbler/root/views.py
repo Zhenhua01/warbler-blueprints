@@ -7,7 +7,7 @@ root = Blueprint('root', __name__,
 
 from sqlalchemy.exc import IntegrityError
 
-from forms import CSRFProtection, LoginForm
+from warbler.root.forms import CSRFProtection, LoginForm
 
 from warbler.users.models import User
 from warbler.users.forms import UserAddForm
@@ -18,22 +18,22 @@ CURR_USER_KEY = "curr_user"
 
 # User signup/login/logout
 
-@root.before_request
-def add_user_to_g():
-    """If we're logged in, add curr user to Flask global."""
+# @root.before_request
+# def add_user_to_g():
+#     """If we're logged in, add curr user to Flask global."""
 
-    if CURR_USER_KEY in session:
-        g.user = User.query.get(session[CURR_USER_KEY])
+#     if CURR_USER_KEY in session:
+#         g.user = User.query.get(session[CURR_USER_KEY])
 
-    else:
-        g.user = None
+#     else:
+#         g.user = None
 
 
-@root.before_request
-def add_csrf_only_form():
-    """Add a CSRF-only form so that every route can use it."""
+# @root.before_request
+# def add_csrf_only_form():
+#     """Add a CSRF-only form so that every route can use it."""
 
-    g.csrf_form = CSRFProtection()
+#     g.csrf_form = CSRFProtection()
 
 
 def do_login(user):
@@ -77,14 +77,14 @@ def signup():
 
         except IntegrityError:
             flash("Username already taken", 'danger')
-            return render_template('users/signup.html', form=form)
+            return render_template('/signup.html', form=form)
 
         do_login(user)
 
         return redirect("/")
 
     else:
-        return render_template('users/signup.html', form=form)
+        return render_template('/signup.html', form=form)
 
 
 @root.route('/login', methods=["GET", "POST"])
@@ -105,7 +105,7 @@ def login():
 
         flash("Invalid credentials.", 'danger')
 
-    return render_template('users/login.html', form=form)
+    return render_template('/login.html', form=form)
 
 
 @root.post('/logout')
@@ -126,7 +126,7 @@ def logout():
 
 # Homepage and error pages
 
-@root.get('/')
+@root.route('/', methods=["GET"])
 def homepage():
     """Show homepage:
 
@@ -147,7 +147,7 @@ def homepage():
         return render_template('home.html', messages=messages)
 
     else:
-        return render_template('home-anon.html')
+        return render_template('/home-anon.html')
 
 
 @root.errorhandler(404)

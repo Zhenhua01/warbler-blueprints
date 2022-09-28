@@ -6,8 +6,8 @@ users = Blueprint('users', __name__,
                     static_folder='../static')
 
 
-from forms import UserEditForm
-from models import db, User
+from warbler.users.forms import UserEditForm
+from warbler.users.models import db, User
 
 from warbler.root.views import do_logout
 
@@ -33,7 +33,7 @@ def list_users():
     else:
         users = User.query.filter(User.username.like(f"%{search}%")).all()
 
-    return render_template('users/index.html', users=users)
+    return render_template('/index.html', users=users)
 
 
 @users.get('/users/<int:user_id>')

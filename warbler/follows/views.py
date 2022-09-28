@@ -5,8 +5,8 @@ follows = Blueprint('follows', __name__,
                     template_folder='templates',
                     static_folder='../static')
 
-from models import db
-from ..users.models import User
+from warbler.follows.models import db
+from warbler.users.models import User
 
 # follows routes:
 

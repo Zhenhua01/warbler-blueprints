@@ -1,5 +1,5 @@
 
-from follows.models import Follows
+from warbler.follows.models import Follows
 from flask_bcrypt import Bcrypt
 from flask_sqlalchemy import SQLAlchemy
 
